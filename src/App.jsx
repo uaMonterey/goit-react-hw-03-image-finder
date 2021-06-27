@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 //components
+import Container from './components/Container';
 import Searchbar from 'components/Searchbar';
 import Modal from './components/Modal';
 import ImageGallery from './components/ImageGallery';
@@ -75,7 +76,7 @@ class App extends Component {
     const { images, showModal, largeImageURL, isLoading } = this.state;
     console.log(this.state.searchQuery);
     return (
-      <div className="App">
+      <Container>
         <Searchbar onSubmit={this.onSubmit} />
 
         {images.length > 0 && (
@@ -91,8 +92,9 @@ class App extends Component {
             <img src={largeImageURL} alt="" />
           </Modal>
         )}
+
         {images.length > 0 && <Button onClick={this.onLoadMore} />}
-      </div>
+      </Container>
     );
   }
 }
