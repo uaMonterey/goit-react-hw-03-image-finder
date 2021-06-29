@@ -56,7 +56,6 @@ class App extends Component {
 
     API(options)
       .then(({ data }) => {
-        console.log(options);
         this.setState(prevState => ({
           images: [...prevState.images, ...data.hits],
           currentPage: prevState.currentPage + 1,
@@ -65,16 +64,18 @@ class App extends Component {
       .catch(error => this.setState({ error }))
       .finally(() => {
         this.setState({ isLoading: false });
-        window.scrollTo({
-          top: document.querySelector('#imageGallery').scrollHeight,
-          behavior: 'smooth',
-        });
+        if (currentPage > 1) {
+          window.scrollTo({
+            top: document.querySelector('#imageGallery').scrollHeight,
+            behavior: 'smooth',
+          });
+        }
       });
   };
 
   render() {
     const { images, showModal, largeImageURL, isLoading } = this.state;
-    console.log(this.state.searchQuery);
+
     return (
       <Container>
         <Searchbar onSubmit={this.onSubmit} />
